@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<!-- 
+    @description 扫码验证显示结果页面
+    @author 易文俊
+    @since 2017-08-03
+ -->
+<html>
+<head>
+<title>跨省大件审批</title>
+<meta name="author" content="www.tpri.com" />
+<meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<link href="js/jquery.mobile/jquery.mobile-1.4.5.min.css"
+    rel="stylesheet" type="text/css" />
+<link href="css/mui.css" rel="stylesheet" />
+<link href="css/app.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery/1.11.1/jquery.min.js"></script>
+<script src="js/mui.min.js"></script>
+<script src="js/mui.previewimage.js"></script>
+<script src="js/mui.zoom.js"></script>
+<script src="js/jquery.mobile/jquery.mobile-1.4.5.min.js"></script>
+<script src="js/jquery.qrcode.min.js"></script>
+<script src="js/util/ajax.js" charset="UTF-8"></script>
+<script src="js/information.js" charset="UTF-8"></script>
+<script src="../../res.wx.qq.com/open/js/jweixin-1.4.0.js" type="text/javascript"></script>
+<style type="text/css">
+#qrcode {
+    position: absolute;
+    top: 30px;
+    padding: 10px;
+    height: 180px;
+    width: 180px;
+    text-align: center middle;
+}
+#box_qrcode{
+    display: none;
+}
+#pro{
+    font-weight: bold;
+}
+#codeico {
+    position: absolute;
+    top: 80px;
+    left: 80px;
+    width: 40px;
+    height: 40px;
+    /* background: url(images/favicon.png) no-repeat; */
+    /* background-size:24px 24px; */
+}
+</style>
+</head>
+<body>
+
+
+<!-- Copyright � 2005. Spidersoft Ltd -->
+<style>
+A.applink:hover {border: 2px dotted #DCE6F4;padding:2px;background-color:#ffff00;color:green;text-decoration:none}
+A.applink       {border: 2px dotted #DCE6F4;padding:2px;color:#2F5BFF;background:transparent;text-decoration:none}
+A.info          {color:#2F5BFF;background:transparent;text-decoration:none}
+A.info:hover    {color:green;background:transparent;text-decoration:underline}
+</style>
+<div style='BORDER: 1px solid #DCE6F4; MARGIN-TOP: 20px; MARGIN-BOTTOM: 20px; MARGIN-LEFT: 5px; MARGIN-RIGHT: 5px; PADDING: 5px; BACKGROUND-COLOR: #eef8ff;line-height:180%; COLOR: #000000; font-family: Arial; font-size: 8pt; width=100%; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr="#FFFFFFFF", EndColorStr="#F2F5FAFF");'>
+This page was saved using <a class="applink" href="http://www.spidersoft.com"><b>WebZIP 7.0.3.1030</b></a> <a class="applink" href="http://www.spidersoft.com"><b>offline browser</b></a>  on  08/12/20 12:20:32.<br>
+<b>Address:</b> <a class="info" href="http://licwx.tpri.org.cn/zlwx/information.html?reqNo=A4500002020080700035&status=52&from=singlemessage">http://licwx.tpri.org.cn/zlwx/information.html?reqNo=A4500002020080700035&status=52&from=singlemessage</a><br>
+<b>Title:</b> 跨省大件审批 &nbsp;&bull;&nbsp; <b>Size:</b> 8889<br></div>
+<!-- /Copyright � 2005. Spidersoft Ltd -->
+
+
+    <div data-role="page">
+        <input id="reqNoHidden" type="hidden" value="A4500002020080700035" />
+        <input id="status" type="hidden" value="52" />
+        <div data-role="header" data-position="fixed" data-theme="a"
+            style="background-color: #18558D">
+            
+            <h1></h1>
+        </div>        
+        
+         <div id="msg" style="position: fixed;width: 50%;height: 40px;top: 50%;left: 25%;margin-top: -15px;padding: 6px;z-index: 3;font-size: 30px;color: #ff6633;text-align: center;display: block;transform: rotate(20deg);display;border: 2px solid #ff6633;
+    	font-family: monospace;">此证有效</div>
+        <div role="main" class="ui-content">
+            <ul data-role="listview" data-divider-theme="a">                
+                <li id="box_qrcode";>
+                    <div class="detail-name detail-name-blod ">通行证二维码：</div>
+                    <div class="detail-value detail-name-blod" style="height: 260px;">
+                        <div id="qrcode" style="background:#ffffff;foreground:#000000;">
+                            <img src="images/prcode.png" width="180"/>  
+                        </div>
+                    </div></li>
+                <li data-role="list-divider" class="category-title">基本信息</li>  <!-- 基本信息 -->              
+                <li><div class="detail-name detail-name-blod ">超限运输许可证号：</div>
+                    <div class="detail-value " id="reqNo">A3700002020081002605</div></li>
+                <li><div class="detail-name detail-name-blod">有效范围：</div>
+                    <div class="detail-value " id="passDists">山东省，河南省，陕西省</div></li>
+                <li><div class="detail-name detail-name-blod ">通行时间：</div>
+                    <div class="detail-value " id="passDate">2020年08月15日 18时23分 至 2020年09月15日 23时59分 </div></li>
+                <li><div class="detail-name detail-name-blod ">通行次数：</div>
+                    <div class="detail-value " id="passCount">多次</div></li>    
+                <li><div class="detail-name detail-name-blod">通行路线：</div>
+                    <div class="detail-value " id="roads">
+                        </br>
+                        <span id = 'pro'>山东省: </span>市中收费站--G2001 济南绕城高速-S1 济聊 高速-G0321 德上高速--鲁豫界
+                        </br><hr>
+                        </br>
+                        <span id = 'pro'>河南省: </span>豫鲁界--G0321 德上高速-G3511 菏宝高速-G55 二广高速 -G30连霍高速--豫陕界
+                        </br><hr>
+                        </br>
+                        <span id = 'pro'>陕西省: </span>陕豫界--G30连霍高速-G3021临兴高速-G69银百高速--咸阳北收费站
+                        </br><hr>
+                    </div></li>
+                <li><div class="detail-name detail-name-blod">承运单位：</div>
+                    <div class="detail-value " id="certName">林枭峥</div></li>
+                <li><div class="detail-name detail-name-blod">经营许可证号：</div>
+                    <div class="detail-value " id="orgCertNo">130625315610</div></li>
+                    
+                    
+                    
+                <li><div class="detail-name detail-name-blod">经营许可证有效期：</div>
+                    <div class="detail-value " id="periodDate">2016-09-23 至 2020-09-23</div></li>
+                    
+                <li data-role="list-divider" class="category-title">货物信息</li> <!-- 货物信息 -->
+                <li><div class="detail-name detail-name-blod">货物名称：</div>
+                    <div class="detail-value " id="cargoInfo">压机</div></li>
+                <li><div class="detail-name detail-name-blod">货物重量：</div>
+                    <div class="detail-value " id="cargoWeight">127吨</div></li>
+                <li><div class="detail-name detail-name-blod">货物外廓尺寸(米)：</div>
+                    <div class="detail-value " id="cargoOutline">12.00x4.60x3.70</div></li>
+                    
+                <li data-role="list-divider" class="category-title">车辆信息</li> <!-- 车辆信息 -->
+                <li><div class="detail-name detail-name-blod">牵引车车号牌：</div>
+                    <div class="detail-value" id="vehicleNo">冀FN2591</div></li>
+                <li><div class="detail-name detail-name-blod">牵引车厂牌型号：</div>
+                    <div class="detail-value" id="model">陕汽牌SX4256NX324</div></li>
+                <li><div class="detail-name detail-name-blod">牵引车整备质量：</div>
+                    <div class="detail-value" id="vehWeight">10.00吨</div></li>                
+                <li class="han-veh"><div class="detail-name detail-name-blod">挂车车号牌：</div>
+                    <div class="detail-value" id="hanvehicleNo">陕A5687超</div></li>
+                <li class="han-veh"><div class="detail-name detail-name-blod">挂车厂牌型号：</div>
+                    <div class="detail-value" id="hanmodel">梁山东岳牌CSQ9305TDP</div></li>
+                <li class="han-veh"><div class="detail-name detail-name-blod">挂车整备质量：</div>
+                    <div class="detail-value " id="hanvehWeight">19.00吨</div></li>
+                
+                <li data-role="list-divider" class="category-title">车货总体信息</li> <!-- 车货总体信息 -->
+                <li><div class="detail-name detail-name-blod">车货总重量：</div>
+                    <div class="detail-value " id="totalWeight">156.00吨</div></li>
+                <li><div class="detail-name detail-name-blod">车货外廓尺寸(米)：</div>
+                    <div class="detail-value " id="totalOutline">23.00x4.60x4.70</div></li>
+                <li><div class="detail-name detail-name-blod">轴荷分布：</div>
+                    <div class="detail-value " id="axlesLoad">10+20+7*18</div></li>
+                <li><div class=" detail-name-blod">车货总体轮廓图：</div>
+                    <div class="detail-image detail-value" id="totalImgs">
+                        <div><img alt='车货照片' src='images/3.png' data-preview-group='1' /></div>
+                        <div><img alt='车货照片' src='images/3.png' data-preview-group='1' /></div>
+                        <div><img alt='车货照片' src='images/3.png' data-preview-group='1' /></div>
+                        <div><img alt='车货照片' src='images/1.png' data-preview-group='1' /></div>
+                    </div></li>
+                
+                <li data-role="list-divider" class="category-title">备注</li>
+                <li><div class="detail-value " id="bz">发证通过 若受疫情防控限行，请遵守当地政府相关规定和提前咨询122。</div></li>
+                    
+                <li data-role="list-divider" class="category-title">其他信息</li> <!-- 其他信息 -->
+                <li><div class="detail-name detail-name-blod">通行意见：</div>
+                    <div class="detail-value " id="passOpinion">
+                        </br>山东省：</br>
+                        交通部门意见:同意</br>
+                        公安部门意见:暂无!</br><hr>
+                        </br>河南省：</br>
+                        交通部门意见:原则上同意其在申请的时间路线内行驶。车辆应当遵守《中华人民共和国道路交通安全法》及其《实施条例》的相关规定，严格按照《朝鲜运输车辆行驶公路管理规定》第20条要求通行。行至我省请提前与沿途/市高速交警支队电话联系，了解沿途交通管制情况，听从交警指挥。联系电话：12122、通行我省高速大件运输车辆请于每日早6时至晚22时通行，超过此时段后请即刻就近停靠服务区休息，违反规定罚款200记6分。</br>
+                        公安部门意见:暂无!</br><hr>
+                        </br>陕西省：</br>
+                        交通部门意见:同意</br>
+                        公安部门意见:暂无!</br><hr>
+                    </div></li>                
+                <li><div class="detail-name-blod">护送方案：</div>
+                    <div class="detail-image detail-value" id="planfile">无</div></li> 
+                <li><div class="detail-name-blod">运输计划：</div>
+                    <div class="detail-image detail-value" id="transportplan">无</div></li> 
+            </ul>
+        </div>
+        <div style=" margin: 10px auto;border-top: 1px  black; position: relative; text-align: center;">
+            <span style="display:inline-block;  width:100%; border-top:2px solid #62b5de; vertical-align:5px; "></span>                
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                Information.loadInformationData();
+            });
+        </script>
+    </div>
+</body>
+</html>
